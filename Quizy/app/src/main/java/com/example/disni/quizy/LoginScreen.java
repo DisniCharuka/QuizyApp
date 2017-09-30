@@ -58,9 +58,10 @@ public class LoginScreen extends AppCompatActivity {
 
         if(isUser)
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        else
+        else {
             errorMessage.setTitle("Error");
-        errorMessage.setMessage("User is not existed. Pls register!");
-        errorMessage.show();
+            errorMessage.setMessage("User is not existed. Pls register!");
+            errorMessage.show();
+        }
     }
 }
