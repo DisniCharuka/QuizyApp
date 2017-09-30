@@ -1,5 +1,6 @@
 package com.example.disni.quizy;
 
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,6 +44,7 @@ public class AddNewUser extends AppCompatActivity {
                    logingMessage.setTitle("Login Success");
                     logingMessage.setMessage("Sucessfully inserted a new user!");
                     logingMessage.show();
+                    startActivity(new Intent(getApplicationContext(), LoginScreen.class));
 
                 }
             }

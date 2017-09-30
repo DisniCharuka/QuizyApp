@@ -44,8 +44,9 @@ public class DBHandler extends SQLiteOpenHelper {
         long newRowId = db.insert(UsersMaster.Users.TABLE_NAME, null, values);
     }
 
-    public void readInfo()
+    public boolean readInfo(String userName, String password)
     {
+        boolean isUser = false;
         SQLiteDatabase db = getReadableDatabase();
 
         // Define a projection that specifies which columns from the database
@@ -57,8 +58,14 @@ public class DBHandler extends SQLiteOpenHelper {
         };
 
         // Filter results WHERE "username" = 'SLIIT User'
-        String selection = UsersMaster.Users._ID + " = ?";
-        String[] selectionArgs = { "SLIIT User" };
+        //String selection = UsersMaster.Users._ID + " = ?";
+        //String[] selectionArgs = { "SLIIT User" };
+
+        String selection1 = UsersMaster.Users.COLUMN_NAME_USERNAME + " = ?";
+        String[] selectionArgs1 = { "userName" };
+
+        String selection2 = UsersMaster.Users.COLUMN_NAME_PASSWORD + " = ?";
+        String[] selectionArgs2 = { "password" };
 
         // How you want the results sorted in the resulting Cursor
         String sortOrder = UsersMaster.Users.COLUMN_NAME_USERNAME + " DESC";
@@ -73,15 +80,30 @@ public class DBHandler extends SQLiteOpenHelper {
                 sortOrder                        // The sort order
         ); //no where statement or grouping values are set.
 
-        List userNames = new ArrayList<>();
-        List passwords = new ArrayList<>();
+        // List userNames = new ArrayList<>();
+        //List passwords = new ArrayList<>();
 
-        while(cursor.moveToNext()) {
+      /*  while(cursor.moveToNext()) {
             String userName = cursor.getString( cursor.getColumnIndexOrThrow(UsersMaster.Users.COLUMN_NAME_USERNAME));
             String password = cursor.getString( cursor.getColumnIndexOrThrow(UsersMaster.Users.COLUMN_NAME_PASSWORD));
             userNames.add(userName);
             passwords.add(password);
+        }*/
+
+        while(cursor.moveToNext()) {
+            String searchUserName = cursor.getString(cursor.getColumnIndexOrThrow(UsersMaster.Users.COLUMN_NAME_USERNAME));
+            String searchPassword = cursor.getString(cursor.getColumnIndexOrThrow(UsersMaster.Users.COLUMN_NAME_PASSWORD));
+
+            if(userName.toString().equals(searchUserName) && password.toString().equals(searchPassword))
+            {
+                isUser =  true;
+                break;
+            }
+
+            //userNames.add(userName);
+            //passwords.add(password);
         }
         cursor.close();
+        return isUser;
     }
 }
