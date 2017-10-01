@@ -16,7 +16,7 @@ public class AddNewUser extends AppCompatActivity {
     protected DBHandler mDbHandler;
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Users.db";
-    Button btnSaveUser;
+    Button btnSaveUser, btnUpdate;
     EditText txtNewUserName;
     EditText txtNewPwd;
     AlertDialog.Builder logingMessage;
@@ -26,6 +26,7 @@ public class AddNewUser extends AppCompatActivity {
         setContentView(R.layout.activity_add_new_user);
 
         btnSaveUser = (Button)findViewById(R.id.btnSave);
+        btnUpdate = (Button)findViewById(R.id.btnUpdate);
         txtNewUserName = (EditText)findViewById(R.id.txtNewUserName);
         txtNewPwd = (EditText)findViewById(R.id.txtNewPwd);
         logingMessage = new AlertDialog.Builder(this);
@@ -46,6 +47,20 @@ public class AddNewUser extends AppCompatActivity {
                     logingMessage.show();
                     startActivity(new Intent(getApplicationContext(), LoginScreen.class));
 
+                }
+            }
+        });
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!(txtNewUserName.getText().toString().equals("") || txtNewPwd.getText().toString().equals(""))) {
+                    mDbHandler.updateInfo(txtNewUserName.getText().toString(), txtNewPwd.getText().toString());
+
+                    logingMessage.setTitle("Update Success");
+                    logingMessage.setMessage("Sucessfully updated a user!");
+                    logingMessage.show();
+                    startActivity(new Intent(getApplicationContext(), LoginScreen.class));
                 }
             }
         });

@@ -73,7 +73,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 selectionArgs,                            // The values for the WHERE clause
                 null,                            // don't group the rows
                 null,                            // don't filter by row groups
-                sortOrder                        // The sort order
+                null                        // The sort order
         ); //no where statement or grouping values are set.
 
         // List userNames = new ArrayList<>();
@@ -88,9 +88,26 @@ public class DBHandler extends SQLiteOpenHelper {
 
         while(cursor.moveToNext()) {
             cursor.close();
-            return true; // return trur if there is a record fetched by the cursor.
+            return true; // return true if there is a record fetched by the cursor.
         }
         cursor.close();
         return false;
+    }
+
+    public void updateInfo(String userName, String pwd){
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(UsersMaster.Users.COLUMN_NAME_PASSWORD, pwd);
+
+        String selection = UsersMaster.Users.COLUMN_NAME_USERNAME + " LIKE ?";
+        String[] selectionArgs = { userName };
+
+        int count = db.update(
+                UsersMaster.Users.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs
+        );
     }
 }
