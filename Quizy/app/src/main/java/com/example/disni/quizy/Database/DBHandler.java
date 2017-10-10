@@ -110,4 +110,11 @@ public class DBHandler extends SQLiteOpenHelper {
                 selectionArgs
         );
     }
+
+    public void deleteInfo(String userName){
+        SQLiteDatabase db = getReadableDatabase();
+        String selection = UsersMaster.Users.COLUMN_NAME_USERNAME + "LIKE ?";
+        String[] selectionArgs = { userName };
+        db.delete(UsersMaster.Users.TABLE_NAME, selection, selectionArgs);
+    }
 }

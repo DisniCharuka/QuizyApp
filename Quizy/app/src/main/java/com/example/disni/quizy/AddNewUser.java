@@ -16,7 +16,9 @@ public class AddNewUser extends AppCompatActivity {
     protected DBHandler mDbHandler;
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Users.db";
-    Button btnSaveUser, btnUpdate;
+
+
+    Button btnSaveUser, btnUpdate, btnDelete;
     EditText txtNewUserName;
     EditText txtNewPwd;
     AlertDialog.Builder logingMessage;
@@ -27,6 +29,7 @@ public class AddNewUser extends AppCompatActivity {
 
         btnSaveUser = (Button)findViewById(R.id.btnSave);
         btnUpdate = (Button)findViewById(R.id.btnUpdate);
+        btnDelete = (Button)findViewById(R.id.btnDelete);
         txtNewUserName = (EditText)findViewById(R.id.txtNewUserName);
         txtNewPwd = (EditText)findViewById(R.id.txtNewPwd);
         logingMessage = new AlertDialog.Builder(this);
@@ -61,6 +64,19 @@ public class AddNewUser extends AppCompatActivity {
                     logingMessage.setMessage("Sucessfully updated a user!");
                     logingMessage.show();
                     startActivity(new Intent(getApplicationContext(), LoginScreen.class));
+                }
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!(txtNewUserName.getText().toString().equals(""))) {
+                    mDbHandler.deleteInfo(txtNewUserName.getText().toString());
+
+                    logingMessage.setTitle("Delete Success");
+                    logingMessage.setMessage("Sucessfully deleted a user!");
+                    logingMessage.show();
                 }
             }
         });
