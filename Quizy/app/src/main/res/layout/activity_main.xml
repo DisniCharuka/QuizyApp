@@ -20,9 +20,10 @@
             android:text="Quiz1"
             tools:layout_editor_absoluteX="30dp"
             tools:layout_editor_absoluteY="248dp"
+            android:layout_marginTop="51dp"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="49dp" />
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="52dp" />
 
         <Button
             android:id="@+id/btnQuiz2"
@@ -59,6 +60,15 @@
             android:layout_below="@+id/btnQuiz4"
             android:layout_marginTop="19dp"
             android:text="Quiz5" />
+
+        <Button
+            android:id="@+id/btnCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/btnQuiz1"
+            android:layout_marginStart="71dp"
+            android:layout_toEndOf="@+id/btnQuiz1"
+            android:text="Camera" />
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

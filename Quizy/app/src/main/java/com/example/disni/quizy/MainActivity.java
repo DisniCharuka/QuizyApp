@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
     Button btnQuiz3;
     Button btnQuiz4;
     Button btnQuiz5;
+    Button btnCamera;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         btnQuiz3 = (Button) findViewById(R.id.btnQuiz3);
         btnQuiz4 = (Button) findViewById(R.id.btnQuiz4);
         btnQuiz5 = (Button) findViewById(R.id.btnQuiz5);
+        btnCamera = (Button)findViewById(R.id.btnCamera);
 
         btnQuiz1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +64,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Quiz5.class);
+                startActivity(intent);
+            }
+        });
+
+        btnCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
                 startActivity(intent);
             }
         });
