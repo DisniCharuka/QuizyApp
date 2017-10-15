@@ -63,7 +63,7 @@ public class DBHandler extends SQLiteOpenHelper {
         String selection = UsersMaster.Users.COLUMN_NAME_USERNAME + " = ? AND " + UsersMaster.Users.COLUMN_NAME_PASSWORD + " = ?";
         String[] selectionArgs = { userName,  password};
 
-        // How you want the results sorted in the resulting Cursor
+        // How you want the results sorted in the     resulting Cursor
         String sortOrder = UsersMaster.Users.COLUMN_NAME_USERNAME + " DESC";
 
         Cursor cursor = db.query(
@@ -113,7 +113,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void deleteInfo(String userName){
         SQLiteDatabase db = getReadableDatabase();
-        String selection = UsersMaster.Users.COLUMN_NAME_USERNAME + "LIKE ?";
+        String selection = UsersMaster.Users.COLUMN_NAME_USERNAME + " LIKE ?";
         String[] selectionArgs = { userName };
         db.delete(UsersMaster.Users.TABLE_NAME, selection, selectionArgs);
     }
